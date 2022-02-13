@@ -1,0 +1,10 @@
+server_host = HOST_IP
+search_base = SEARCH_BASE
+#scope = sub
+query_filter = (mailacceptinggeneralid=%s)
+result_attribute = maildrop  #Account from DC
+#result_format = %s
+version = 3
+bind = yes
+bind_dn = BIND_DN
+bind_pw = BIND_PW
