@@ -8,14 +8,15 @@ services:
       - "8389:389"
       - "8636:636"
     environment:
-      - LDAP_ORGANISATION="openldap"
+      - LDAP_ORGANISATION="openldap" 
       - LDAP_DOMAIN=DOMAIN_NAME
       - LDAP_ADMIN_PASSWORD=BIND_PW
       - LDAP_CONFIG_PASSWORD=BIND_PW
     volumes:
       - ~/ldap/backup:/data/backup
       - ~/ldap/data:/var/lib/openldap
-      - ~/ldap/config:/etc/ldap
+      - ~/ldap/slapd.d:/etc/ldap/slapd.d
+      - ~/ldap/config:/etc/openldap/slapd.d
       - ~/ldap/certs:/assets/slapd/certs
     command: [--copy-service,  --loglevel, debug]
   phpldapadmin:

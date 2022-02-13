@@ -186,9 +186,9 @@ Openldap server
 
 copy docker-compose.yml     
 > docker pull inmethod/docker-postfix-ad:1.2    
-> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-ad:1.2 bash -c "cp /etc/postfix/* /opt/mount/"    
+> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:0.1 bash -c "cp /root/openldap/* /opt/mount/"    
 
-Modify DOMAIN_NAME , PWD , ports number  in docker-compose.yml file  , start ldap server and use browser to login     
+Modify DOMAIN_NAME , BIND_PW , ports number  in docker-compose.yml file  , start ldap server and use browser to login     
 ex: DOMAIN_NAME kafeiou.pw     
 login:    
 cn=admin,dc=kafeiou,dc=pw    
