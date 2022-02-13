@@ -12,7 +12,7 @@ deref           = never
 
 pass_attrs      = userPassword=password
 default_pass_scheme = CRYPT
-hosts = HOST_IP:389
+hosts = HOST_IP
 base= SEARCH_BASE 
 dn = BIND_DN
 dnpass = BIND_PW
