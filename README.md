@@ -76,7 +76,7 @@ Steps
     -e MY_NETWORKS="<PERMIT_NETWORKS>"  \
     -e TZ="<TZ>" \
     -e ENABLE_QUOTA="true" \
-    --restart always -d inmethod/docker-postfix-ad:tag
+    --restart always -d inmethod/docker-postfix-openldap:tag
 
 Example
 -----
@@ -185,8 +185,8 @@ Openldap server
 * Prepare your openldap server if your don't have
 
 copy docker-compose.yml     
-> docker pull inmethod/docker-postfix-ad:1.2    
-> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:0.1 bash -c "cp /root/openldap/* /opt/mount/"    
+> docker pull inmethod/docker-postfix-openldap:0.6   
+> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:0.6 bash -c "cp /root/openldap/* /opt/mount/"    
 
 Modify DOMAIN_NAME , BIND_PW , ports number  in docker-compose.yml file  , start ldap server and use browser to login     
 ex: DOMAIN_NAME kafeiou.pw     
