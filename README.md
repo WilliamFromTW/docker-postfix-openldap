@@ -48,13 +48,13 @@ Steps
 **parameters**
 
     <OPENLDAP_HOST_IP> : openldap server ip
-    <SEARCH_BASE> : active directory ldap search base
+    <SEARCH_BASE> : ldap search base
     <BIND_DN> : openldap server bind dn
     <BIND_PW> : openldap server bind password
     <EMAIL_DOMAIN_NAME> :  mail domain name
     <MAIL_HOST_NAME> :  mail server host name
     <PERMIT_NETWORKS> :  permit network (optional)
-    <ALIASES> : active directory ldap aliase (optional)
+    <ALIASES> :  ldap aliase (optional)
     <TZ>: time zone default is Asia/Taipei (optional)        
 
 **docker command**
@@ -129,7 +129,11 @@ Rspamd spam filter WEB UI
 --    
 *  ACCESS WEB UI    
     
-   use httpd reverse proxy to access localhost:11334    
+   use httpd reverse proxy to access localhost:11334     
+   or     
+   modify /etc/rspamd/local.d/worker-controller.inc
+   add     
+   >  bind_socket = "*:11334";     
 
 *  change login password      
     
