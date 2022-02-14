@@ -119,7 +119,7 @@ Example
     -e BIND_DN="cn=ldap,cn=Users,dc=test,dc=com" \
     -e BIND_PW="password" \
     -e TZ="Asia/Taipei" \
-    --restart always -d --net=host inmethod/docker-postfix-openldap:0.1
+    --restart always -d --net=host inmethod/docker-postfix-openldap:0.9
     
 
 Rspamd spam filter WEB UI     
@@ -182,11 +182,11 @@ Enable Quota
 Openldap server 
 ----
 
-* Prepare your openldap server if your don't have
+* Prepare your openldap server if your don't have one 
 
-copy docker-compose.yml     
-> docker pull inmethod/docker-postfix-openldap:0.6   
-> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:0.6 bash -c "cp /root/openldap/* /opt/mount/"    
+copy docker-compose.yml from images    
+> docker pull inmethod/docker-postfix-openldap:tag   
+> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:tag bash -c "cp /root/openldap/* /opt/mount/"    
 
 Modify DOMAIN_NAME , BIND_PW , ports number  in docker-compose.yml file  , start ldap server and use browser to login     
 ex: DOMAIN_NAME kafeiou.pw     
