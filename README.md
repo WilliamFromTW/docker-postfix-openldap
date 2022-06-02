@@ -48,13 +48,13 @@ Steps
 **parameters**
 
     <OPENLDAP_HOST_IP> : openldap server ip
-    <SEARCH_BASE> : active directory ldap search base
+    <SEARCH_BASE> : ldap search base
     <BIND_DN> : openldap server bind dn
     <BIND_PW> : openldap server bind password
     <EMAIL_DOMAIN_NAME> :  mail domain name
     <MAIL_HOST_NAME> :  mail server host name
     <PERMIT_NETWORKS> :  permit network (optional)
-    <ALIASES> : active directory ldap aliase (optional)
+    <ALIASES> :  ldap aliase (optional)
     <TZ>: time zone default is Asia/Taipei (optional)        
 
 **docker command**
@@ -86,11 +86,13 @@ Example
     <SEARCH_BASE> : "cn=Users,dc=test,dc=com" or "dc=test,dc=com"
     <BIND_DN> : cn=ldap,cn=Users,dc=test,dc=com
     <BIND_PW> : password
+    tag is 0.9    
   
 **Mail server(docker)**    
 
     <EMAIL_DOMAIN_NAME> : test.com 
     <MAIL_HOST_NAME> : mail.test.com
+    <MY_NETWORKS> :  192.168.1.0\/24
 
 **TimeZone**
 
@@ -118,15 +120,20 @@ Example
     -e SEARCH_BASE="cn=Users,dc=test,dc=com" \
     -e BIND_DN="cn=ldap,cn=Users,dc=test,dc=com" \
     -e BIND_PW="password" \
+    -e MY_NETWORKS="192.168.1.0\/24" \
     -e TZ="Asia/Taipei" \
-    --restart always -d --net=host inmethod/docker-postfix-openldap:0.1
+    --restart always -d --net=host inmethod/docker-postfix-openldap:0.9
     
 
 Rspamd spam filter WEB UI     
 --    
 *  ACCESS WEB UI    
     
-   use httpd reverse proxy to access localhost:11334    
+   use httpd reverse proxy to access localhost:11334     
+   or     
+   modify /etc/rspamd/local.d/worker-controller.inc
+   add     
+   >  bind_socket = "*:11334";     
 
 *  change login password      
     
@@ -182,19 +189,20 @@ Enable Quota
 Openldap server 
 ----
 
-* Prepare your openldap server if your don't have
+* Prepare your openldap server if your don't have one 
 
-copy docker-compose.yml     
-> docker pull inmethod/docker-postfix-openldap:0.6   
-> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:0.6 bash -c "cp /root/openldap/* /opt/mount/"    
+copy docker-compose.yml from images(if tag is 0.9)    
+> docker pull inmethod/docker-postfix-openldap:0.9   
+> docker run -v $PWD:/opt/mount --rm -ti inmethod/docker-postfix-openldap:tag bash -c "cp /root/openldap/* /opt/mount/"    
 
 Modify DOMAIN_NAME , BIND_PW , ports number  in docker-compose.yml file  , start ldap server and use browser to login     
-ex: DOMAIN_NAME kafeiou.pw     
+ex:     
+DOMAIN_NAME kafeiou.pw     
 login:    
 cn=admin,dc=kafeiou,dc=pw    
 
 * copy postfix.ldif file to openldap server     
-  see readme.txt uncompress file that copy from images    
+  see readme.txt that uncompress file copy from images    
 
 * ALIASES    
     Create posix Group , add objectclass "postfixUser" and give an aliases email in attribute "mailacceptinggeneralid" ,  and include account in group  by add attribute "maildrop", mail drop should be email format.      
