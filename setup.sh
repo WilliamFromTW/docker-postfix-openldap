@@ -5,6 +5,8 @@ if [ -n "${DOMAIN_NAME}" ]; then
  sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/postfix/local-host-names
  sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/postfix/helo_check 
  sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/postfix/domains
+ sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/postfix/local_only_domains
+ sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/postfix/local_only2_domains
  sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/opendkim/opendkim.conf
  sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/opendkim/TrustedHosts
  sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/opendkim/SigningTable
@@ -24,6 +26,8 @@ fi
 if [ -n "${SEARCH_BASE}" ]; then
  sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/postfix/ldap-users.cf
  sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/postfix/ldap-aliases.cf
+ sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/postfix/ldap-local_only.cf
+ sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/postfix/ldap-local_only2.cf
  sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/postfix/saslauthd.conf 
  sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/dovecot/dovecot-ldap.conf.ext 
  sed -i "s/SEARCH_BASE/${SEARCH_BASE}/g" /etc/dovecot/dovecot-ldap2.conf.ext 
@@ -32,6 +36,8 @@ fi
 if [ -n "${HOST_IP}" ]; then
  sed -i "s/HOST_IP/${HOST_IP}/g" /etc/postfix/ldap-users.cf
  sed -i "s/HOST_IP/${HOST_IP}/g" /etc/postfix/ldap-aliases.cf
+ sed -i "s/HOST_IP/${HOST_IP}/g" /etc/postfix/ldap-local_only.cf
+ sed -i "s/HOST_IP/${HOST_IP}/g" /etc/postfix/ldap-local_only2.cf
  sed -i "s/HOST_IP/${HOST_IP}/g" /etc/postfix/saslauthd.conf 
  sed -i "s/HOST_IP/${HOST_IP}/g" /etc/dovecot/dovecot-ldap.conf.ext 
  sed -i "s/HOST_IP/${HOST_IP}/g" /etc/dovecot/dovecot-ldap2.conf.ext 
@@ -41,6 +47,8 @@ fi
 if [ -n "${BIND_DN}" ]; then
  sed -i "s/BIND_DN/${BIND_DN}/g" /etc/postfix/ldap-users.cf
  sed -i "s/BIND_DN/${BIND_DN}/g" /etc/postfix/ldap-aliases.cf
+ sed -i "s/BIND_DN/${BIND_DN}/g" /etc/postfix/ldap-local_only.cf
+ sed -i "s/BIND_DN/${BIND_DN}/g" /etc/postfix/ldap-local_only2.cf
  sed -i "s/BIND_DN/${BIND_DN}/g" /etc/postfix/saslauthd.conf
  sed -i "s/BIND_DN/${BIND_DN}/g" /etc/dovecot/dovecot-ldap.conf.ext 
  sed -i "s/BIND_DN/${BIND_DN}/g" /etc/dovecot/dovecot-ldap2.conf.ext 
@@ -49,6 +57,8 @@ fi
 if [ -n "${BIND_PW}" ]; then
  sed -i "s/BIND_PW/${BIND_PW}/g" /etc/postfix/ldap-users.cf
  sed -i "s/BIND_PW/${BIND_PW}/g" /etc/postfix/ldap-aliases.cf
+ sed -i "s/BIND_PW/${BIND_PW}/g" /etc/postfix/ldap-local_only.cf
+ sed -i "s/BIND_PW/${BIND_PW}/g" /etc/postfix/ldap-local_only2.cf
  sed -i "s/BIND_PW/${BIND_PW}/g" /etc/postfix/saslauthd.conf
  sed -i "s/BIND_PW/${BIND_PW}/g" /etc/dovecot/dovecot-ldap.conf.ext 
  sed -i "s/BIND_PW/${BIND_PW}/g" /etc/dovecot/dovecot-ldap2.conf.ext 
@@ -92,6 +102,8 @@ fi
 
 /usr/bin/chown -R vmail:vmail /home/vmail
 chown -R opendkim:opendkim /etc/opendkim
+postmap /etc/postfix/local_only_domains
+postmap /etc/postfix/local_only2_domains
 postmap /etc/postfix/helo_check
 postmap /etc/postfix/sender_bcc
 postmap /etc/postfix/recipient_bcc
